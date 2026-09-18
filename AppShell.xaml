@@ -11,7 +11,7 @@
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate views:ChuckNorrisPage}"
+        ContentTemplate="{DataTemplate views:HarryPotterPage}"
         Route="MainPage" />
 
 </Shell>

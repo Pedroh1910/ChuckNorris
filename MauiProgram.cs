@@ -31,6 +31,14 @@ namespace ChuckNorris
             builder.Services.AddTransient<ChuckNorrisPage>();
             builder.Services.AddTransient<ChuckNorrisViewModel>();
 
+            builder.Services.AddHttpClient<IHarryPotterService, HarryPotterService>(client =>
+            {
+                client.BaseAddress = new Uri("https://potterapi-fedeperin.vercel.app/");
+            });
+
+            builder.Services.AddTransient<HarryPotterPage>();
+            builder.Services.AddTransient<HarryPotterViewModel>();
+
             return builder.Build();
         }
     }

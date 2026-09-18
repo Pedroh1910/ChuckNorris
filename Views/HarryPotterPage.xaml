@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChuckNorris.Views.HarryPotterPage"
+             xmlns:viewmodel="clr-namespace:ChuckNorris.ViewModels"
+             x:DataType="viewmodel:HarryPotterViewModel"
+             BackgroundColor="#0F172A"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout VerticalOptions="Center" Padding="20" Spacing="20">
+
+            <!-- HEADER -->
+            <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Label Text="⚡ Harry Potter Characters"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                       TextColor="#FFF"
+                       HorizontalOptions="Center" />
+                <Label Text="Gere personagens aleatórios de Hogwarts"
+                       FontSize="15"
+                       TextColor="#94A3B8"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- CARD DE AÇÃO -->
+            <Border Padding="20" 
+                    BackgroundColor="#1E293B"
+                    Stroke="#334155"
+                    StrokeShape="RoundRectangle 24"
+                    StrokeThickness="1">
+                <VerticalStackLayout Spacing="15">
+                    <Button Text="Sortear Personagem"
+                            CornerRadius="16"
+                            BackgroundColor="#6366F1"
+                            TextColor="#FFF"
+                            FontAttributes="Bold"
+                            IsEnabled="{Binding IsNotBusy}"
+                            Command="{Binding ObterPersonagemCommand}" />
+
+                    <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                       IsVisible="{Binding IsBusy}"
+                                       Color="#6366F1"
+                                       HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- CARD DE RESULTADO -->
+            <Border Padding="25"
+                    BackgroundColor="#1E293B"
+                    Stroke="#10B981"
+                    StrokeShape="RoundRectangle 24"
+                    StrokeThickness="2"
+                    IsVisible="{Binding TemResultado}">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Image Source="{Binding Personagem.Image}"
+                           HeightRequest="150"
+                           WidthRequest="150"
+                           Aspect="AspectFit"
+                           HorizontalOptions="Center" />
+
+                    <BoxView HeightRequest="1"
+                             Color="#334155"
+                             Margin="0,5" />
+
+                    <!-- NOME COMPLETO E APELIDO -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Nome Completo"
+                               FontSize="12"
+                               TextColor="#94A3B8" />
+                        <Label Text="{Binding Personagem.FullName}"
+                               TextColor="#FFF"
+                               FontSize="18"
+                               FontAttributes="Bold" />
+                        <Label Text="{Binding Personagem.Nickname, StringFormat='({0})'}"
+                               TextColor="#94A3B8"
+                               FontSize="14" />
+                    </VerticalStackLayout>
+
+                    <!-- CASA DE HOGWARTS E DATA DE NASCIMENTO -->
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Casa de Hogwarts"
+                                   FontSize="12"
+                                   TextColor="#94A3B8" />
+                            <Label Text="{Binding Personagem.HogwartsHouse}"
+                                   TextColor="#10B981"
+                                   FontSize="16"
+                                   FontAttributes="Bold" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Data de Nascimento"
+                                   FontSize="12"
+                                   TextColor="#94A3B8" />
+                            <Label Text="{Binding Personagem.Birthdate}"
+                                   TextColor="#FFF"
+                                   FontSize="14" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
